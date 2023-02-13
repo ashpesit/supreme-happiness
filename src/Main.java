@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -100,5 +101,19 @@ public class Main {
         }
         return count;
     }
+    public static int findPairs(int[] A, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        for (int i = 0; i < A.length; i++) {
+            int remainder = A[i] % k;
+            int complement = (remainder == 0) ? 0 : k - remainder;
+            if (map.containsKey(complement)) {
+                count += map.get(complement);
+            }
+            map.put(remainder, map.getOrDefault(remainder, 0) + 1);
+        }
+        return count;
+    }
+
 }
 
